@@ -7,21 +7,33 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+model Car {
+  id        Int       @id @default(autoincrement())
+  plate     String    @unique
+  brand     String
+  color     String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  removedAt DateTime
+  carDrivers CarDriver[]
 }
 
-model Post {
+model Driver {
   id        Int      @id @default(autoincrement())
+  name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  title     String
-  content   String?
-  published Boolean  @default(false)
-  viewCount Int      @default(0)
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  Int?
+  removedAt DateTime
+  carDrivers CarDriver[]
+}
+
+model CarDriver {
+  id            Int       @id @default(autoincrement())
+  reason        String
+  startedUsing  DateTime  @default(now())
+  finishedUsing DateTime
+  car           Car       @relation(fields: [carId], references: [id])
+  carId         Int       @unique
+  driver        Driver    @relation(fields: [driverId], references: [id])
+  driverId      Int       @unique
 }
