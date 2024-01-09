@@ -8,23 +8,23 @@ datasource db {
 }
 
 model Car {
-  id        Int       @id @default(autoincrement())
-  plate     String    @unique
-  brand     String
-  color     String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  removedAt DateTime
-  carDrivers CarDriver[]
+  id          Int       @id @default(autoincrement())
+  plate       String    @unique
+  brand       String
+  color       String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  removedAt   DateTime
+  carDrivers  CarDriver[]
 }
 
 model Driver {
-  id        Int      @id @default(autoincrement())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  removedAt DateTime
-  carDrivers CarDriver[]
+  id          Int      @id @default(autoincrement())
+  name        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  removedAt   DateTime
+  carDrivers  CarDriver[]
 }
 
 model CarDriver {
