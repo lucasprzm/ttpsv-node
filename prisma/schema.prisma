@@ -14,7 +14,7 @@ model Car {
   color       String
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  removedAt   DateTime
+  removedAt   DateTime?  
   carDrivers  CarDriver[]
 }
 
@@ -23,7 +23,7 @@ model Driver {
   name        String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  removedAt   DateTime
+  removedAt   DateTime?
   carDrivers  CarDriver[]
 }
 
@@ -31,7 +31,7 @@ model CarDriver {
   id            Int       @id @default(autoincrement())
   reason        String
   startedUsing  DateTime  @default(now())
-  finishedUsing DateTime
+  finishedUsing DateTime?
   car           Car       @relation(fields: [carId], references: [id])
   carId         Int       @unique
   driver        Driver    @relation(fields: [driverId], references: [id])
