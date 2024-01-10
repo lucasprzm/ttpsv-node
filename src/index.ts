@@ -1,12 +1,13 @@
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
-import { carsRouter } from "./routes";
+import { carsRouter, driversRouter } from "./routes";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use("/cars", carsRouter);
+app.use("/drivers", driversRouter);
 
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
   if (err instanceof Error) {
@@ -26,3 +27,5 @@ const server = app.listen(3000, () =>
 // #TODO catch para as requisições, criação de carro com placa igual
 // #TODO Retorno de datas com data futura errada, ajustar tempo para BR
 // #TODO Testar cenários adversos
+// #TODO Tirar dados específicos do log para não encher muito, colocar status ou algo mais em caso de erro para ajudar
+// #TODO Verificar melhores práticas para rotas em métodos HTTP

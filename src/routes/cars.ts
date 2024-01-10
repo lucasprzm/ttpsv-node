@@ -17,8 +17,8 @@ const getByBrandColorCarController = new GetByBrandColorCarController();
 
 carsRouter.post("", createCarController.handle);
 carsRouter.get("/id/:id", getByIdCarController.handle);
-carsRouter.delete("/:id", removeCarController.handle);
-carsRouter.put("/:id", updateCarController.handle);
+carsRouter.delete("/id/:id", removeCarController.handle);
+carsRouter.put("/id/:id", updateCarController.handle);
 carsRouter.get("/filter/brand-color", getByBrandColorCarController.handle);
 
 export { carsRouter };
