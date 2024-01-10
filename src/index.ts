@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
-import { carsRouter, driversRouter } from "./routes";
+import { carsDriversRouter, carsRouter, driversRouter } from "./routes";
 
 const app = express();
 
@@ -8,6 +8,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/cars", carsRouter);
 app.use("/drivers", driversRouter);
+app.use("/cars-drivers", carsDriversRouter);
 
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
   if (err instanceof Error) {
@@ -29,3 +30,5 @@ const server = app.listen(3000, () =>
 // #TODO Testar cenários adversos
 // #TODO Tirar dados específicos do log para não encher muito, colocar status ou algo mais em caso de erro para ajudar
 // #TODO Verificar melhores práticas para rotas em métodos HTTP
+// #TODO Verificar chave @unique no CarDriver de carId e driverId, suspeito que vai dar erro
+// #TODO Buscar conversão melhor para o id antes de usá-lo
