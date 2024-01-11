@@ -14,6 +14,6 @@ export class CreateCarController {
     });
 
     console.log(`Car brand ${brand}, plate ${plate}, color ${color} created succesfully!`);
-    return response.status(201).json({ message: "Automóvel criado com sucesso!" });
+    return response.status(201).json({ message: "Automóvel criado com sucesso!", car });
   }
 }

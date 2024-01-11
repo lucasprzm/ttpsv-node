@@ -16,6 +16,6 @@ export class UpdateDriverController {
     });
 
     console.log(`Driver's name updated succesfully!`);
-    return response.status(200).json({ message: "Motorista atualizado com sucesso!" });
+    return response.status(200).json({ message: "Motorista atualizado com sucesso!", driver });
   }
 }

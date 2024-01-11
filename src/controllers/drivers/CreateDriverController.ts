@@ -12,6 +12,6 @@ export class CreateDriverController {
     });
 
     console.log(`Driver created succesfully!`);
-    return response.status(201).json({ message: "Motorista criado com sucesso!" });
+    return response.status(201).json({ message: "Motorista criado com sucesso!", driver });
   }
 }

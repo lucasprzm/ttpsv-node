@@ -18,6 +18,6 @@ export class UpdateCarController {
     });
 
     console.log(`Car brand ${brand}, plate ${plate}, color ${color} updated succesfully!`);
-    return response.status(200).json({ message: "Automóvel atualizado com sucesso!" });
+    return response.status(200).json({ message: "Automóvel atualizado com sucesso!", car });
   }
 }
