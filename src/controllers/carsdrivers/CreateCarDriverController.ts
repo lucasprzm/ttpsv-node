@@ -1,8 +1,8 @@
 import { prismaClient } from "../../../prisma/prismaClient";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
 export class CreateCarDriverController {
-  async handle(request: Request, response: Response) {
+  async handle(request: Request, response: Response, next: NextFunction) {
     const { reason, carId, driverId } = request.body;
 
     const carBeingUsed = await checkCarBeingUsed(carId);
@@ -23,16 +23,20 @@ export class CreateCarDriverController {
       });
     }
 
-    const carDriver = await prismaClient.carDriver.create({
-      data: {
-        reason,
-        carId,
-        driverId,
-      },
-    });
+    const carDriver = await prismaClient.carDriver
+      .create({
+        data: {
+          reason,
+          carId,
+          driverId,
+        },
+      })
+      .catch((err) => next(err));
 
     console.log(`Driver linked to car succesfully!`);
-    return response.status(201).json({ message: "Motorista vinculado ao carro com sucesso!" });
+    return response
+      .status(201)
+      .json({ message: "Motorista vinculado ao carro com sucesso!", carDriver });
 
     async function checkCarBeingUsed(carId: number): Promise<boolean> {
       const carBeingUsed =

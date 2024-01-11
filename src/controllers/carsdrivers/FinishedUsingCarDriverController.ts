@@ -1,20 +1,24 @@
 import { prismaClient } from "../../../prisma/prismaClient";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
 export class FinishedUsingCarDriverController {
-  async handle(request: Request, response: Response) {
+  async handle(request: Request, response: Response, next: NextFunction) {
     const { id } = request.params;
 
-    const carDriver = await prismaClient.carDriver.update({
-      where: {
-        id: +id,
-      },
-      data: {
-        finishedUsing: new Date(),
-      },
-    });
+    const carDriver = await prismaClient.carDriver
+      .update({
+        where: {
+          id: +id,
+        },
+        data: {
+          finishedUsing: new Date(),
+        },
+      })
+      .catch((err) => next(err));
 
     console.log(`Driver's finished using date saved succesfully!`);
-    return response.status(200).json({ message: "Uso do carro finalizado com sucesso!" });
+    return response
+      .status(200)
+      .json({ message: "Uso do carro finalizado com sucesso!", carDriver });
   }
 }
