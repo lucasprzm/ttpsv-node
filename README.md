@@ -1,4 +1,4 @@
-# Diligence Hub Test
+# Teste Técnico Prático Seidor Veritas
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/lucasprzm/diligence-hub-test?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/lucasprzm/diligence-hub-test?style=for-the-badge)
@@ -65,6 +65,8 @@ Pronto! O back-end estará rodando na porta 3000 no servidor local e as requisi�
 ```
 http://localhost:3000
 ```
+
+Link da documentação: [Postman](https://documenter.getpostman.com/view/18322573/2s9YsM8qcr)
 
 ## 🤝 Desenvolvedores
 
