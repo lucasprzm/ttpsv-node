@@ -1,7 +1,7 @@
 # Teste Técnico Prático Seidor Veritas
 
-![GitHub repo size](https://img.shields.io/github/repo-size/lucasprzm/diligence-hub-test?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/lucasprzm/diligence-hub-test?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/lucasprzm/ttpsv-node?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/lucasprzm/ttpsv-node?style=for-the-badge)
 
 > Uma API construída utilizando Node.js para o teste técnico da Seidor Veritas.
 
