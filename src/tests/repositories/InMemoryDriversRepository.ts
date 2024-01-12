@@ -95,6 +95,7 @@ export class InMemoryDriversRepository implements DriversRepository {
     };
     this.driver = driver;
   }
+
   async remove(id: number): Promise<void> {
     const driver = {
       id,
@@ -103,5 +104,7 @@ export class InMemoryDriversRepository implements DriversRepository {
       updatedAt: new Date(),
       removedAt: new Date(),
     };
+
+    this.driver = driver;
   }
 }
