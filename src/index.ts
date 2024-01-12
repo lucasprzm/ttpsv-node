@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import { carsDriversRouter, carsRouter, driversRouter } from "./routes";
 
+// Repository Pattern
 const app = express();
 
 app.use(express.json());
