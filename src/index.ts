@@ -24,10 +24,4 @@ const server = app.listen(3000, () =>
 🚀 Server ready at: http://localhost:3000`)
 );
 
-// #TODO catch para as requisições, criação de carro com placa igual
-// #TODO Retorno de datas com data futura errada, ajustar tempo para BR
-// #TODO Testar cenários adversos
-// #TODO Tirar dados específicos do log para não encher muito, colocar status ou algo mais em caso de erro para ajudar
-// #TODO Verificar melhores práticas para rotas em métodos HTTP
-// #TODO Verificar chave @unique no CarDriver de carId e driverId, suspeito que vai dar erro
-// #TODO Buscar conversão melhor para o id antes de usá-lo
+// #TODO Retorno de datas com data em UTC, ajustar tempo para BR
