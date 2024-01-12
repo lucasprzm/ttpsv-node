@@ -1,4 +1,3 @@
-import { prismaClient } from "../../../prisma/prismaClient";
 import { CarsRepository } from "../../repositories/CarsRepository";
 
 interface ICreateCarRequest {
