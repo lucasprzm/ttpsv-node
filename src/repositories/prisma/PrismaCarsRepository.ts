@@ -18,6 +18,7 @@ export class PrismaCarsRepository implements CarsRepository {
     });
     return car;
   }
+
   async getById(id: number): Promise<Car | null> {
     const car = await prismaClient.car.findFirst({
       where: {
@@ -33,6 +34,7 @@ export class PrismaCarsRepository implements CarsRepository {
     });
     return car;
   }
+
   async getByBrandColor(brand?: string | undefined, color?: string | undefined): Promise<Car[]> {
     const cars = await prismaClient.car.findMany({
       where: {
@@ -53,12 +55,7 @@ export class PrismaCarsRepository implements CarsRepository {
     return cars;
   }
 
-  async update(
-    id: number,
-    plate?: string | undefined,
-    brand?: string | undefined,
-    color?: string | undefined
-  ): Promise<void> {
+  async update(id: number, plate: string, brand: string, color: string): Promise<void> {
     await prismaClient.car.update({
       where: {
         id,
