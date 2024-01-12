@@ -1,5 +1,4 @@
 import { InMemoryCarsRepository } from "../../tests/repositories/InMemoryCarsRepository";
-import { CreateCar } from "./CreateCar";
 import { GetByIdCar } from "./GetByIdCar";
 
 test("get a car by Id", async () => {
@@ -9,9 +8,15 @@ test("get a car by Id", async () => {
   await expect(getByIdCar.execute(1)).resolves.not.toThrow();
   expect(inMemoryCarsRepository.car).toEqual(
     expect.objectContaining({
-      plate: "ABC-1234",
-      brand: "Fiat",
-      color: "Branco",
+      id: 1,
     })
   );
+});
+
+test("should not be able to get a car by Id", async () => {
+  const inMemoryCarsRepository = new InMemoryCarsRepository();
+  const getByIdCar = new GetByIdCar(inMemoryCarsRepository);
+  inMemoryCarsRepository.failTestGetById = true;
+
+  await expect(getByIdCar.execute(2)).rejects.toThrow();
 });

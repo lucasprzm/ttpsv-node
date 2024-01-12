@@ -5,6 +5,7 @@ export class InMemoryCarsRepository implements CarsRepository {
   public cars: Car[] = [];
   public car: Car = {} as Car;
   public testGetByPlate: boolean = false;
+  public failTestGetById: boolean = false;
 
   async create(data: ICreateCarDTO) {
     const car = {
@@ -21,9 +22,12 @@ export class InMemoryCarsRepository implements CarsRepository {
     return car;
   }
 
-  async getById(id: number): Promise<Car> {
+  async getById(id: number): Promise<Car | null> {
+    if (this.failTestGetById) {
+      return null;
+    }
     const car = {
-      id: 1,
+      id,
       plate: "ABC-1234",
       brand: "Fiat",
       color: "Branco",
