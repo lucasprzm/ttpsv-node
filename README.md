@@ -72,6 +72,12 @@ Pronto! O back-end estará rodando na porta 3000 no servidor local e as requisi�
 http://localhost:3000
 ```
 
+Para rodar os testes, utilize o comando seguinte:
+
+```
+npm run test
+```
+
 Link da documentação: [Postman](https://documenter.getpostman.com/view/18322573/2s9YsM8qcr)
 
 ## 🤝 Desenvolvedores
