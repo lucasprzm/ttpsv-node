@@ -6,10 +6,11 @@ export class InMemoryCarsRepository implements CarsRepository {
   public car: Car = {} as Car;
   public testGetByPlate: boolean = false;
   public failTestGetById: boolean = false;
+  public failTest: boolean = false;
 
   async create(data: ICreateCarDTO) {
     const car = {
-      id: 2,
+      id: Math.floor(Math.random() * 100),
       plate: data.plate,
       brand: data.brand,
       color: data.color,
@@ -40,22 +41,39 @@ export class InMemoryCarsRepository implements CarsRepository {
     return car;
   }
 
-  getByBrandColor(
-    brand?: string | undefined,
-    color?: string | undefined
-  ): Promise<
-    {
-      id: number;
-      plate: string;
-      brand: string;
-      color: string;
-      createdAt: Date;
-      updatedAt: Date;
-      removedAt: Date | null;
-    }[]
-  > {
-    throw new Error("Method not implemented.");
+  async getByBrandColor(brand?: string | undefined, color?: string | undefined): Promise<Car[]> {
+    const cars: Car[] = [];
+    if (this.failTest) {
+      return cars;
+    }
+    const car1 = {
+      id: Math.floor(Math.random() * 100),
+      plate: "ABC-1234",
+      brand: brand || "VW",
+      color: color || "Branco",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      removedAt: null,
+    };
+    this.cars.push(car1);
+    cars.push(car1);
+
+    const car2 = {
+      id: Math.floor(Math.random() * 100),
+      plate: "FGV-1234",
+      brand: brand || "Fiat",
+      color: color || "Verde",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      removedAt: null,
+    };
+
+    this.cars.push(car2);
+    cars.push(car2);
+
+    return cars;
   }
+
   update(
     id: number,
     plate?: string | undefined,
