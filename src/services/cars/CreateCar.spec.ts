@@ -66,7 +66,7 @@ test("should not be able to create a car without a color", async () => {
 test("should not be able to create a car with an existing plate", async () => {
   const inMemoryCarsRepository = new InMemoryCarsRepository();
   const createCar = new CreateCar(inMemoryCarsRepository);
-  inMemoryCarsRepository.testGetByPlate = true;
+  inMemoryCarsRepository.failTestGetByPlate = true;
 
   await expect(
     createCar.execute({
