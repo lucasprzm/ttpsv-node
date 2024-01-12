@@ -82,8 +82,18 @@ export class InMemoryCarsRepository implements CarsRepository {
   ): Promise<void> {
     throw new Error("Method not implemented.");
   }
-  remove(id: number): Promise<void> {
-    throw new Error("Method not implemented.");
+
+  async remove(id: number): Promise<void> {
+    const car = {
+      id,
+      plate: "ABC-1234",
+      brand: "Fiat",
+      color: "Branco",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      removedAt: new Date(),
+    };
+    this.car = car;
   }
 
   async getByPlate(plate: string): Promise<Car | null> {
