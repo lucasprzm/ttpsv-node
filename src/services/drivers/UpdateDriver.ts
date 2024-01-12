@@ -1,39 +1,21 @@
-import { prismaClient } from "../../../prisma/prismaClient";
 import { DriversRepository } from "../../repositories/DriversRepository";
 
 export class UpdateDriver {
   constructor(private driversRepository: DriversRepository) {}
 
   async execute(id: number, name: string) {
-    const driver = await prismaClient.driver.findFirst({
-      where: {
-        AND: {
-          id: {
-            equals: id,
-          },
-          removedAt: {
-            equals: null,
-          },
-        },
-      },
-    });
+    if (!id) {
+      throw new Error("Id não informado.");
+    }
+    if (!name) {
+      throw new Error("Nome não informado.");
+    }
+    const driver = await this.driversRepository.getById(id);
     if (!driver) {
       throw new Error("Motorista não encontrado.");
     }
 
-    const driverAlreadyExists = await prismaClient.driver.findFirst({
-      where: {
-        AND: {
-          name: {
-            equals: name,
-          },
-          removedAt: {
-            equals: null,
-          },
-        },
-      },
-    });
-
+    const driverAlreadyExists = await this.driversRepository.getByFullName(name);
     if (driverAlreadyExists) {
       throw new Error("Motorista já cadastrado.");
     }
