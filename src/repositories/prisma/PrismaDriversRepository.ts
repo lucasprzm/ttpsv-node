@@ -43,6 +43,22 @@ export class PrismaDriversRepository implements DriversRepository {
     return drivers;
   }
 
+  async getByFullName(name: string): Promise<Driver | null> {
+    const driver = await prismaClient.driver.findFirst({
+      where: {
+        AND: {
+          name: {
+            equals: name,
+          },
+          removedAt: {
+            equals: null,
+          },
+        },
+      },
+    });
+    return driver;
+  }
+
   async getNamesCarsDrivers(): Promise<Partial<Driver>[]> {
     const drivers = await prismaClient.driver.findMany({
       select: {

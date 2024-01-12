@@ -6,6 +6,7 @@ export class InMemoryDriversRepository implements DriversRepository {
   public driver: Driver = {} as Driver;
   public failTestGetById: boolean = false;
   public failTestGetByName: boolean = false;
+  public failTestGetByFullName: boolean = false;
 
   async create(data: ICreateDriverDTO): Promise<Driver> {
     const driver = {
@@ -63,9 +64,27 @@ export class InMemoryDriversRepository implements DriversRepository {
     drivers.push(driver2);
     return drivers;
   }
+
+  async getByFullName(name: string): Promise<Driver | null> {
+    if (this.failTestGetByFullName) {
+      return null;
+    }
+    const driver = {
+      id: Math.floor(Math.random() * 100),
+      name,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      removedAt: null,
+    };
+    this.driver = driver;
+
+    return driver;
+  }
+
   getNamesCarsDrivers(): Promise<Partial<Driver>[]> {
     throw new Error("Method not implemented.");
   }
+
   async update(id: number, name: string): Promise<void> {
     const driver = {
       id,
