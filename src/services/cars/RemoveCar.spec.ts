@@ -7,6 +7,7 @@ test("remove a car", async () => {
 
   await expect(removeCar.execute(1)).resolves.not.toThrow();
   expect(inMemoryCarsRepository.car.removedAt).not.toBeNull();
+  expect(inMemoryCarsRepository.car.id).toBe(1);
 });
 
 test("should not be able to remove a car that does not exist", async () => {
