@@ -17,3 +17,10 @@ test("should not be able to remove a car that does not exist", async () => {
 
   await expect(removeCar.execute(1)).rejects.toThrow();
 });
+
+test("should not be able to remove a car with empty id", async () => {
+  const inMemoryCarsRepository = new InMemoryCarsRepository();
+  const removeCar = new RemoveCar(inMemoryCarsRepository);
+
+  await expect(removeCar.execute(NaN)).rejects.toThrow();
+});

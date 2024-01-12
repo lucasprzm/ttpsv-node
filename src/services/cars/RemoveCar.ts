@@ -4,6 +4,9 @@ export class RemoveCar {
   constructor(private carsRepository: CarsRepository) {}
 
   async execute(id: number) {
+    if (!id) {
+      throw new Error("Id não informado.");
+    }
     const car = await this.carsRepository.getById(id);
     if (!car) {
       throw new Error("Carro não encontrado.");
