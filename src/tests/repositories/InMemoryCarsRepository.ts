@@ -4,9 +4,9 @@ import { CarsRepository, ICreateCarDTO } from "../../repositories/CarsRepository
 export class InMemoryCarsRepository implements CarsRepository {
   public cars: Car[] = [];
   public car: Car = {} as Car;
-  public testGetByPlate: boolean = false;
+  public failTestGetByPlate: boolean = false;
   public failTestGetById: boolean = false;
-  public failTest: boolean = false;
+  public failTestGetByBrandColor: boolean = false;
 
   async create(data: ICreateCarDTO) {
     const car = {
@@ -43,7 +43,7 @@ export class InMemoryCarsRepository implements CarsRepository {
 
   async getByBrandColor(brand?: string | undefined, color?: string | undefined): Promise<Car[]> {
     const cars: Car[] = [];
-    if (this.failTest) {
+    if (this.failTestGetByBrandColor) {
       return cars;
     }
     const car1 = {
@@ -74,13 +74,17 @@ export class InMemoryCarsRepository implements CarsRepository {
     return cars;
   }
 
-  update(
-    id: number,
-    plate?: string | undefined,
-    brand?: string | undefined,
-    color?: string | undefined
-  ): Promise<void> {
-    throw new Error("Method not implemented.");
+  async update(id: number, plate: string, brand: string, color: string): Promise<void> {
+    const car = {
+      id,
+      plate,
+      brand,
+      color,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      removedAt: null,
+    };
+    this.car = car;
   }
 
   async remove(id: number): Promise<void> {
@@ -97,7 +101,7 @@ export class InMemoryCarsRepository implements CarsRepository {
   }
 
   async getByPlate(plate: string): Promise<Car | null> {
-    if (!this.testGetByPlate) {
+    if (!this.failTestGetByPlate) {
       return null;
     }
     const car = {
