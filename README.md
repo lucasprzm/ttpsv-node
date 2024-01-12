@@ -54,7 +54,13 @@ Abra o terminal de sua preferência e instale as dependências do projeto com o 
 npm install
 ```
 
-Após a instalação, utilize o comando seguinte para rodar o servidor:
+Após a instalação, utilize o comando seguinte para gerar o banco de dados e aplicar as migrações:
+
+```
+npx prisma migrate deploy
+```
+
+Após a migração, utilize o comando seguinte para rodar o servidor:
 
 ```
 npm run dev
