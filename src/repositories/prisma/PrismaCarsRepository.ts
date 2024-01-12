@@ -3,7 +3,22 @@ import { prismaClient } from "../../../prisma/prismaClient";
 import { CarsRepository, ICreateCarDTO } from "../CarsRepository";
 
 export class PrismaCarsRepository implements CarsRepository {
-  async getById(id: number): Promise<Car> {
+  async getByPlate(plate: string): Promise<Car | null> {
+    const car = await prismaClient.car.findFirst({
+      where: {
+        AND: {
+          plate: {
+            equals: plate,
+          },
+          removedAt: {
+            equals: null,
+          },
+        },
+      },
+    });
+    return car;
+  }
+  async getById(id: number): Promise<Car | null> {
     const car = await prismaClient.car.findFirst({
       where: {
         AND: {
@@ -16,9 +31,6 @@ export class PrismaCarsRepository implements CarsRepository {
         },
       },
     });
-    if (!car) {
-      throw new Error("Carro não encontrado.");
-    }
     return car;
   }
   async getByBrandColor(brand?: string | undefined, color?: string | undefined): Promise<Car[]> {
@@ -70,7 +82,7 @@ export class PrismaCarsRepository implements CarsRepository {
     });
   }
 
-  async create(data: ICreateCarDTO) {
+  async create(data: ICreateCarDTO): Promise<Car | null> {
     const car = await prismaClient.car.create({
       data,
     });

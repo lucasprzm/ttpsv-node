@@ -19,18 +19,7 @@ export class CreateCar {
     if (!color) {
       throw new Error("Cor é obrigatória.");
     }
-    const carAlreadyExists = await prismaClient.car.findFirst({
-      where: {
-        AND: {
-          plate: {
-            equals: plate,
-          },
-          removedAt: {
-            equals: null,
-          },
-        },
-      },
-    });
+    const carAlreadyExists = await this.carsRepository.getByPlate(plate);
     if (carAlreadyExists) {
       throw new Error("Carro já cadastrado.");
     }

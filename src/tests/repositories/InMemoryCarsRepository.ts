@@ -4,6 +4,7 @@ import { CarsRepository, ICreateCarDTO } from "../../repositories/CarsRepository
 export class InMemoryCarsRepository implements CarsRepository {
   public cars: Car[] = [];
   public car: Car = {} as Car;
+  public testGetByPlate: boolean = false;
 
   async create(data: ICreateCarDTO) {
     const car = {
@@ -61,5 +62,21 @@ export class InMemoryCarsRepository implements CarsRepository {
   }
   remove(id: number): Promise<void> {
     throw new Error("Method not implemented.");
+  }
+
+  async getByPlate(plate: string): Promise<Car | null> {
+    if (!this.testGetByPlate) {
+      return null;
+    }
+    const car = {
+      id: 1,
+      plate,
+      brand: "Fiat",
+      color: "Branco",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      removedAt: null,
+    };
+    return car;
   }
 }

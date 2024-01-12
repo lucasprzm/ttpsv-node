@@ -7,9 +7,10 @@ export interface ICreateCarDTO {
 }
 
 export interface CarsRepository {
-  create(data: ICreateCarDTO): Promise<Car>;
-  getById(id: number): Promise<Car>;
+  create(data: ICreateCarDTO): Promise<Car | null>;
+  getById(id: number): Promise<Car | null>;
   getByBrandColor(brand?: string, color?: string): Promise<Car[]>;
   update(id: number, plate?: string, brand?: string, color?: string): Promise<void>;
   remove(id: number): Promise<void>;
+  getByPlate(plate: string): Promise<Car | null>;
 }
