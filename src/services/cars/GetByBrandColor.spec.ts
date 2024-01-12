@@ -80,7 +80,7 @@ test("should not be able to get cars by brand and color if brand and color are n
 test("should not be able to get cars by brand and color if brand and color are not found", async () => {
   const inMemoryCarsRepository = new InMemoryCarsRepository();
   const getByBrandColor = new GetByBrandColor(inMemoryCarsRepository);
-  inMemoryCarsRepository.failTest = true;
+  inMemoryCarsRepository.failTestGetByBrandColor = true;
 
   await expect(getByBrandColor.execute("Fiat", "Preto")).rejects.toThrow();
 });
