@@ -4,7 +4,7 @@ import { CreateDriver } from "./CreateDriver";
 test("create a driver", async () => {
   const inMemoryDriversRepository = new InMemoryDriversRepository();
   const createDriver = new CreateDriver(inMemoryDriversRepository);
-  inMemoryDriversRepository.failTestGetByName = true;
+  inMemoryDriversRepository.failTestGetByFullName = true;
 
   await expect(
     createDriver.execute({

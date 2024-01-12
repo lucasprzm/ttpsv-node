@@ -11,8 +11,8 @@ export class CreateDriver {
     if (!data.name) {
       throw new Error("Nome do motorista não informado.");
     }
-    const driverAlreadyExists = await this.driversRepository.getByName(data.name);
-    if (driverAlreadyExists.length > 0) {
+    const driverAlreadyExists = await this.driversRepository.getByFullName(data.name);
+    if (driverAlreadyExists) {
       throw new Error("Motorista já cadastrado.");
     }
 
