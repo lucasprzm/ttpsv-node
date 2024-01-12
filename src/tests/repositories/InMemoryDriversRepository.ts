@@ -51,6 +51,16 @@ export class InMemoryDriversRepository implements DriversRepository {
     };
     this.drivers.push(driver1);
     drivers.push(driver1);
+
+    const driver2 = {
+      id: Math.floor(Math.random() * 100),
+      name,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      removedAt: null,
+    };
+    this.drivers.push(driver2);
+    drivers.push(driver2);
     return drivers;
   }
   getNamesCarsDrivers(): Promise<Partial<Driver>[]> {
