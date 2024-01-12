@@ -9,7 +9,7 @@ export class PrismaDriversRepository implements DriversRepository {
     });
     return driver;
   }
-  async getById(id: number): Promise<Driver> {
+  async getById(id: number): Promise<Driver | null> {
     const driver = await prismaClient.driver.findFirst({
       where: {
         AND: {
@@ -22,11 +22,10 @@ export class PrismaDriversRepository implements DriversRepository {
         },
       },
     });
-    if (!driver) {
-      throw new Error("Motorista não encontrado.");
-    }
+
     return driver;
   }
+
   async getByName(name: string): Promise<Driver[]> {
     const drivers = await prismaClient.driver.findMany({
       where: {
@@ -59,7 +58,7 @@ export class PrismaDriversRepository implements DriversRepository {
 
     return drivers;
   }
-  async update(id: number, name?: string): Promise<void> {
+  async update(id: number, name: string): Promise<void> {
     await prismaClient.driver.update({
       where: {
         id,
