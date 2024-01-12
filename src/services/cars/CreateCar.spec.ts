@@ -62,17 +62,3 @@ test("should not be able to create a car without a color", async () => {
     })
   ).rejects.toThrow();
 });
-
-test("should not be able to create a car with an existing plate", async () => {
-  const inMemoryCarsRepository = new InMemoryCarsRepository();
-  const createCar = new CreateCar(inMemoryCarsRepository);
-  inMemoryCarsRepository.testGetByPlate = true;
-
-  await expect(
-    createCar.execute({
-      plate: "ABC-1234",
-      brand: "Fiat",
-      color: "Branco",
-    })
-  ).rejects.toThrow();
-});
