@@ -17,6 +17,9 @@ export class UpdateCar {
     if (!plate) {
       throw new Error("Placa é obrigatória.");
     }
+    if (!/^[A-Z]{3}\d{4}$/i.test(plate) && !/^[A-Z]{3}\d[A-Z]\d{2}$/i.test(plate)) {
+      throw new Error("Placa inválida. Utilize o formato AAA0000 ou ABC1D23.");
+    }
     if (!brand) {
       throw new Error("Marca é obrigatória.");
     }

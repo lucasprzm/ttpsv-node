@@ -8,13 +8,13 @@ test("update car", async () => {
   await expect(
     updateCar.execute({
       id: "1",
-      plate: "FGV-1234",
+      plate: "FGV1234",
       brand: "Fiat",
       color: "Verde",
     })
   ).resolves.not.toThrow();
   expect(inMemoryCarsRepository.car.id).toBe(1);
-  expect(inMemoryCarsRepository.car.plate).toBe("FGV-1234");
+  expect(inMemoryCarsRepository.car.plate).toBe("FGV1234");
   expect(inMemoryCarsRepository.car.brand).toBe("Fiat");
   expect(inMemoryCarsRepository.car.color).toBe("Verde");
 });
@@ -99,6 +99,20 @@ test("should not be able to update a car with an existing plate", async () => {
     updateCar.execute({
       id: "1",
       plate: "ABC-1234",
+      brand: "Fiat",
+      color: "Branco",
+    })
+  ).rejects.toThrow();
+});
+
+test("should not be able to update a car with an invalid plate", async () => {
+  const inMemoryCarsRepository = new InMemoryCarsRepository();
+  const updateCar = new UpdateCar(inMemoryCarsRepository);
+
+  await expect(
+    updateCar.execute({
+      id: "1",
+      plate: "ABC-123",
       brand: "Fiat",
       color: "Branco",
     })
