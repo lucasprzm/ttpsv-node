@@ -4,9 +4,11 @@ import { Driver } from "@prisma/client";
 export class InMemoryDriversRepository implements DriversRepository {
   public drivers: Driver[] = [];
   public driver: Driver = {} as Driver;
+  public partialDrivers: Partial<Driver>[] = [];
   public failTestGetById: boolean = false;
   public failTestGetByName: boolean = false;
   public failTestGetByFullName: boolean = false;
+  public failTestGetNamesCarsDrivers: boolean = false;
 
   async create(data: ICreateDriverDTO): Promise<Driver> {
     const driver = {
@@ -81,8 +83,52 @@ export class InMemoryDriversRepository implements DriversRepository {
     return driver;
   }
 
-  getNamesCarsDrivers(): Promise<Partial<Driver>[]> {
-    throw new Error("Method not implemented.");
+  async getNamesCarsDrivers(): Promise<Partial<Driver>[]> {
+    const drivers: Partial<Driver>[] = [];
+    if (this.failTestGetNamesCarsDrivers) {
+      return drivers;
+    }
+
+    const driver1 = {
+      name: "Motorista 1",
+      carDrivers: [
+        {
+          car: {
+            plate: "ABC-1234",
+            color: "Azul",
+            brand: "Fiat",
+            model: "Uno",
+            year: 2010,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            removedAt: null,
+          },
+        },
+      ],
+    };
+    this.partialDrivers.push(driver1);
+    drivers.push(driver1);
+
+    const driver2 = {
+      name: "Motorista 2",
+      carDrivers: [
+        {
+          car: {
+            plate: "ABC-1234",
+            color: "Azul",
+            brand: "Fiat",
+            model: "Uno",
+            year: 2010,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            removedAt: null,
+          },
+        },
+      ],
+    };
+    this.partialDrivers.push(driver2);
+    drivers.push(driver2);
+    return drivers;
   }
 
   async update(id: number, name: string): Promise<void> {

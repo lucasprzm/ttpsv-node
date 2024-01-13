@@ -5,9 +5,7 @@ export class GetNamesCarsDriversDriver {
 
   async execute() {
     const drivers = await this.driversRepository.getNamesCarsDrivers();
-    if (drivers.length === 0) {
-      throw new Error("Nenhum motorista encontrado.");
-    }
+
     return drivers;
   }
 }
