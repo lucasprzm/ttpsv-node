@@ -19,6 +19,40 @@ export class PrismaCarsDriversRepository implements CarsDriversRepository {
       },
     });
   }
+  async getByIdAndFinishedUsingNull(id: number): Promise<CarDriver | null> {
+    const carDriver = await prismaClient.carDriver.findFirst({
+      where: {
+        id: {
+          equals: id,
+        },
+        finishedUsing: {
+          equals: null,
+        },
+        removedAt: {
+          equals: null,
+        },
+      },
+    });
+    return carDriver;
+  }
+
+  async getByIdAndFinishedUsingNotNull(id: number): Promise<CarDriver | null> {
+    const carDriver = await prismaClient.carDriver.findFirst({
+      where: {
+        id: {
+          equals: id,
+        },
+        finishedUsing: {
+          not: null,
+        },
+        removedAt: {
+          equals: null,
+        },
+      },
+    });
+    return carDriver;
+  }
+
   async getByCarIdDriverIdAndFinishedUsingNull(
     carId: number,
     driverId: number

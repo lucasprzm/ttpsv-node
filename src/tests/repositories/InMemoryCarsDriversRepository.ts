@@ -6,6 +6,8 @@ import {
 
 export class InMemoryCarsDriversRepository implements CarsDriversRepository {
   public carDriver: CarDriver = {} as CarDriver;
+  public failTestGetByIdAndFinishedUsingNull: boolean = false;
+  public failTestGetByIdAndFinishedUsingNotNull: boolean = false;
   public failTestGetByCarIdDriverIdAndFinishedUsingNull: boolean = false;
   public failTestGetByCarIdAndFinishedUsingNull: boolean = false;
   public failTestGetByDriverIdAndFinishedUsingNull: boolean = false;
@@ -40,6 +42,42 @@ export class InMemoryCarsDriversRepository implements CarsDriversRepository {
       removedAt: null,
     };
     this.carDriver = carDriver;
+  }
+  async getByIdAndFinishedUsingNull(id: number): Promise<CarDriver | null> {
+    if (this.failTestGetByIdAndFinishedUsingNull) {
+      return null;
+    }
+    const carDriver = {
+      id,
+      driverId: Math.floor(Math.random() * 100),
+      carId: Math.floor(Math.random() * 100),
+      reason: "Teste",
+      startedUsing: new Date(),
+      finishedUsing: null,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      removedAt: null,
+    };
+    this.carDriver = carDriver;
+    return carDriver;
+  }
+  async getByIdAndFinishedUsingNotNull(id: number): Promise<CarDriver | null> {
+    if (this.failTestGetByIdAndFinishedUsingNotNull) {
+      return null;
+    }
+    const carDriver = {
+      id,
+      driverId: Math.floor(Math.random() * 100),
+      carId: Math.floor(Math.random() * 100),
+      reason: "Teste",
+      startedUsing: new Date(),
+      finishedUsing: new Date(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      removedAt: null,
+    };
+    this.carDriver = carDriver;
+    return carDriver;
   }
   async getByCarIdDriverIdAndFinishedUsingNull(
     carId: number,

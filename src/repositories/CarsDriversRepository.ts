@@ -9,6 +9,8 @@ export interface ICreateCarDriverDTO {
 export interface CarsDriversRepository {
   create(data: ICreateCarDriverDTO): Promise<CarDriver>;
   finishedUsing(id: number): Promise<void>;
+  getByIdAndFinishedUsingNull(id: number): Promise<CarDriver | null>;
+  getByIdAndFinishedUsingNotNull(id: number): Promise<CarDriver | null>;
   getByCarIdDriverIdAndFinishedUsingNull(
     carId: number,
     driverId: number
