@@ -39,12 +39,12 @@
 
 Antes de começar, verifique se você tem os requisitos a seguir:
 
-- Versão LTS mais recente do NodeJS
+- Versão LTS mais recente do [Node.js](https://nodejs.org).
 
 ## 🚀 Instalação
 
 - Clone o projeto desse repositório;
-- Para instalar o projeto, siga as etapas seguintes para o front-end e back-end.
+- Para instalar o projeto, siga as etapas seguintes para o back-end.
 
 ### Back-end
 
