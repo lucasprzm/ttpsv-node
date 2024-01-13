@@ -4,40 +4,13 @@ import { CarsDriversRepository } from "../../repositories/CarsDriversRepository"
 export class FinishedUsingCarDriver {
   constructor(private carsDriversRepository: CarsDriversRepository) {}
   async execute(id: number) {
-    const carDriver = await prismaClient.carDriver.findFirst({
-      where: {
-        AND: {
-          id: {
-            equals: id,
-          },
-          finishedUsing: {
-            equals: null,
-          },
-          removedAt: {
-            equals: null,
-          },
-        },
-      },
-    });
+    const carDriver = await this.carsDriversRepository.getByIdAndFinishedUsingNull(id);
     if (!carDriver) {
       throw new Error("Carro/motorista não encontrado.");
     }
 
-    const carDriverAlreadyFinished = await prismaClient.carDriver.findFirst({
-      where: {
-        AND: {
-          id: {
-            equals: id,
-          },
-          finishedUsing: {
-            not: null,
-          },
-          removedAt: {
-            equals: null,
-          },
-        },
-      },
-    });
+    const carDriverAlreadyFinished =
+      await this.carsDriversRepository.getByIdAndFinishedUsingNotNull(id);
 
     if (carDriverAlreadyFinished) {
       throw new Error("Carro/motorista já finalizado.");
