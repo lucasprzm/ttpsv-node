@@ -7,7 +7,7 @@ test("create car", async () => {
 
   await expect(
     createCar.execute({
-      plate: "ABC-1234",
+      plate: "ABC1234",
       brand: "Fiat",
       color: "Branco",
     })
@@ -17,7 +17,7 @@ test("create car", async () => {
   expect(inMemoryCarsRepository.cars).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
-        plate: "ABC-1234",
+        plate: "ABC1234",
         brand: "Fiat",
         color: "Branco",
       }),
@@ -71,6 +71,19 @@ test("should not be able to create a car with an existing plate", async () => {
   await expect(
     createCar.execute({
       plate: "ABC-1234",
+      brand: "Fiat",
+      color: "Branco",
+    })
+  ).rejects.toThrow();
+});
+
+test("should not be able to create a car with an invalid plate", async () => {
+  const inMemoryCarsRepository = new InMemoryCarsRepository();
+  const createCar = new CreateCar(inMemoryCarsRepository);
+
+  await expect(
+    createCar.execute({
+      plate: "ABC123",
       brand: "Fiat",
       color: "Branco",
     })

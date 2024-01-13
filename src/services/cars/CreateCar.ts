@@ -12,6 +12,9 @@ export class CreateCar {
     if (!plate) {
       throw new Error("Placa é obrigatória.");
     }
+    if (!/^[A-Z]{3}\d{4}$/i.test(plate)) {
+      throw new Error("Placa inválida. Utilize o formato AAA-0000.");
+    }
     if (!brand) {
       throw new Error("Marca é obrigatória.");
     }
